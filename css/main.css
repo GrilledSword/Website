@@ -1,9 +1,22 @@
+
 /* ============================================
    OverBitCore – Main Stylesheet
    Liquid Glass + 3D Parallax + Dark/Light + Responsive
+   Fold: #region / #endregion (VS Code, Cursor, Rider)
    ============================================ */
 
-/* ---------- Theme Variables ---------- */
+/*
+  MINI TUTORIAL – mit nyúlj, mit ne.
+  Szín: a :root és a [data-theme="light"] blokk. --accent a lila,
+  --accent-2 a cián, --accent-3 a rózsaszín. Egy változó, az egész oldal.
+  Készségkártya méret: keresd a .skills-grid minmax(320px)-et.
+  320px = desktopon 3 kártya egy sorban. Ha 160-ra veszed, megint 6 keskeny oszlop.
+  Üveget NE blur-özd CSS-ből a .glass osztályon. A liquid-glass.js rajzolja.
+  Összecsukás: a #region kommentek a VS Code-ban, Cursorban és Riderben csukódnak.
+*/
+
+
+/* #region Theme Variables */
 :root,
 [data-theme="dark"] {
   --bg-deep: #050510;
@@ -92,8 +105,9 @@
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
   --transition: 0.3s var(--ease);
 }
+/* #endregion */
 
-/* ---------- Reset & Base ---------- */
+/* #region Reset & Base */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -161,9 +175,9 @@ button, input, textarea {
   pointer-events: none;
   display: block;
 }
+/* #endregion */
 
-
-/* ========== 3D PARALLAX + VERTEX SCENE ========== */
+/* #region 3D PARALLAX + VERTEX SCENE */
 .parallax-scene {
   position: fixed;
   inset: 0;
@@ -318,8 +332,9 @@ button, input, textarea {
 
 .ch-1 { top: 28%; right: 22%; }
 .ch-2 { bottom: 30%; right: 18%; }
+/* #endregion */
 
-/* ---------- Liquid Glass (WebGL only – no CSS blur layer) ---------- */
+/* #region Liquid Glass (WebGL only – no CSS blur layer) */
 .glass,
 .liquid-glass,
 .glass-sm {
@@ -377,8 +392,9 @@ main {
 .navbar {
   z-index: 10000;
 }
+/* #endregion */
 
-/* ---------- Layout ---------- */
+/* #region Layout */
 .container {
   width: 100%;
   max-width: var(--container-max);
@@ -481,8 +497,9 @@ main {
   position: relative;
   z-index: 1;
 }
+/* #endregion */
 
-/* ---------- Navbar (viewport-fixed) ---------- */
+/* #region Navbar (viewport fixed) */
 .navbar {
   position: fixed;
   top: 16px;
@@ -553,14 +570,35 @@ main {
 }
 
 
-.logo-icon {
+/* MOD: SVG logo + text from rossz, size kept from jo (40px) */
+.logo-icon,
+.logo-text-svg,
+.logo-text {
   display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    vertical-align: middle;
-    width: 40px;  /* Itt állítsd be a kívánt szélességet */
-    height: 40px; /* Itt állítsd be a kívánt magasságot */
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
   font-size: 1.25rem;
+}
+
+.logo-icon img.svg-content {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.logo-text img,
+.logo-text-svg img {
+  height: 22px;
+  width: auto;
+  display: block;
+  object-fit: contain;
 }
 
 .nav-links {
@@ -661,8 +699,9 @@ main {
   border-radius: 2px;
   transition: all 0.3s var(--ease);
 }
+/* #endregion */
 
-/* ---------- Hero ---------- */
+/* #region Hero */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -700,6 +739,16 @@ main {
   margin-bottom: 20px;
 }
 
+/* MOD: hero SVG wordmark from rossz */
+.hero-title .hero-logo-text {
+  width: 100%;
+  max-width: 550px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 20px rgba(124, 92, 255, 0.3));
+}
+
 .gradient-text {
   background: linear-gradient(135deg, 
     var(--text-primary) 0%, 
@@ -731,8 +780,9 @@ main {
   justify-content: center;
   flex-wrap: wrap;
 }
+/* #endregion */
 
-/* ---------- Buttons ---------- */
+/* #region Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -779,8 +829,9 @@ main {
 }
 
 .full-width { width: 100%; }
+/* #endregion */
 
-/* ---------- About ---------- */
+/* #region About */
 .about-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -816,8 +867,9 @@ main {
   font-size: 0.95rem;
   line-height: 1.7;
 }
+/* #endregion */
 
-/* ---------- Projects ---------- */
+/* #region Projects */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -923,27 +975,55 @@ main {
   color: var(--text-muted);
 }
 
+/* MOD: a class a projektek.js status mezője. Csak a *-playable villog. */
 .status-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: #22c55e;
   box-shadow: 0 0 8px #22c55e;
+  flex-shrink: 0;
 }
 
-.status-dot.concept {
-  background: #f59e0b;
-  box-shadow: 0 0 8px #f59e0b;
-}
-
-.status-dot.experimental {
-  background: var(--accent-2);
-  box-shadow: 0 0 8px var(--accent-2);
-}
-
+.status-dot.completed,
 .status-dot.released {
-  background: #3b82f6;
-  box-shadow: 0 0 8px #3b82f6;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+}
+
+.status-dot.beta,
+.status-dot.concept {
+  background: #eab308;
+  box-shadow: 0 0 8px #eab308;
+}
+
+.status-dot.beta-playable {
+  background: #eab308;
+  box-shadow: 0 0 8px #eab308;
+  animation: status-blink 1.15s ease-in-out infinite;
+}
+
+.status-dot.alpha,
+.status-dot.experimental {
+  background: #ef4444;
+  box-shadow: 0 0 8px #ef4444;
+}
+
+.status-dot.alpha-playable {
+  background: #ef4444;
+  box-shadow: 0 0 8px #ef4444;
+  animation: status-blink 1.15s ease-in-out infinite;
+}
+
+.status-dot.in-development,
+.status-dot.dev {
+  background: #6b7280;
+  box-shadow: none;
+}
+
+@keyframes status-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
 }
 
 .project-link {
@@ -1001,19 +1081,26 @@ main {
 .btn-action:hover svg {
   opacity: 1;
 }
+/* #endregion */
 
-/* ---------- Skills ---------- */
+/* #region Skills */
+/* TUTORIAL: ez a szám dönti el, hány kártya fér egy sorba.
+   minmax(320px, 1fr) -> desktopon 3 széles kártya.
+   minmax(220px, 1fr) -> 4 kártya. minmax(160px, 1fr) -> a régi 6 keskeny. */
+/* MOD: 160px minimum packed 6 skinny columns into 1140px.
+   320px forces 3 cards/row on desktop (~340px each). */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
 }
 
 .skill-card {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 28px 20px;
+  min-height: 420px;
+  padding: 40px 32px 32px;
   text-align: center;
   transition: all var(--transition);
 }
@@ -1027,27 +1114,29 @@ main {
 }
 
 .skill-icon {
-  font-size: 3rem;
-  margin-bottom: 14px;
+  font-size: 3.4rem;
+  margin-bottom: 18px;
 }
 
+/* MOD: 48px icons were postage stamps next to the title */
 .skill-icon svg {
-  width: 48px;
-  height: 48px;
+  width: 72px;
+  height: 72px;
   display: block;
   margin: 0 auto;
 }
 
 .skill-card h4 {
-  font-size: 1.5rem !important;
+  font-size: 1.85rem;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 14px;
+  line-height: 1.2;
 }
 
 .skill-card p {
-  font-size: 0.85rem !important;
+  font-size: 1.05rem;
   color: var(--text-muted);
-  line-height: 2;
+  line-height: 1.65;
 }
 
 .skill-link {
@@ -1071,13 +1160,13 @@ main {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 16px;
+  padding: 12px 22px;
   background: var(--border-glass);
   border: 1px solid var(--border-glass-strong);
   border-radius: 8px;
   color: var(--text-primary);
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   font-weight: 500;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(5px);
@@ -1093,9 +1182,9 @@ main {
 .btn-download svg {
   stroke-width: 2.5;
 }
+/* #endregion */
 
-
-/* ---------- Contact ---------- */
+/* #region Contact */
 .contact-wrapper {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
@@ -1219,8 +1308,9 @@ main {
   transform: translateY(-2px);
   color: var(--accent);
 }
+/* #endregion */
 
-/* ---------- Footer ---------- */
+/* #region Footer */
 .footer {
   position: relative;
   z-index: 1;
@@ -1257,8 +1347,9 @@ main {
   font-size: 0.85rem;
   color: var(--text-muted);
 }
+/* #endregion */
 
-/* ========== RESPONSIVE – Tablet ========== */
+/* #region RESPONSIVE – Tablet */
 @media (max-width: 1024px) {
   :root {
     --section-pad: 80px;
@@ -1285,8 +1376,9 @@ main {
     opacity: 0.4;
   }
 }
+/* #endregion */
 
-/* ========== RESPONSIVE – Mobile / small tablet ========== */
+/* #region RESPONSIVE – Mobile / small tablet */
 @media (max-width: 768px) {
   :root {
     --section-pad: 64px;
@@ -1315,6 +1407,21 @@ main {
 
   .logo-text {
     font-size: 1rem;
+  }
+
+  /* MOD: SVG logo scale on small screens (from rossz) */
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .logo-text img,
+  .logo-text-svg img {
+    height: 18px;
+  }
+
+  .hero-title .hero-logo-text {
+    max-width: 85vw;
   }
 
   /* Hide desktop nav, show hamburger */
@@ -1425,16 +1532,30 @@ main {
 
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
+    gap: 16px;
   }
 
   .skill-card {
-    padding: 22px 14px;
+    min-height: 0;
+    padding: 28px 18px 22px;
   }
 
   .skill-icon {
-    font-size: 1.7rem;
-    margin-bottom: 10px;
+    font-size: 2.4rem;
+    margin-bottom: 12px;
+  }
+
+  .skill-icon svg {
+    width: 56px;
+    height: 56px;
+  }
+
+  .skill-card h4 {
+    font-size: 1.35rem;
+  }
+
+  .skill-card p {
+    font-size: 0.95rem;
   }
 
   /* Contact */
@@ -1463,8 +1584,9 @@ main {
   .orb-b { width: 180px; height: 180px; }
   .orb-c { width: 140px; height: 140px; }
 }
+/* #endregion */
 
-/* ========== RESPONSIVE – Small phones ========== */
+/* #region RESPONSIVE – Small phones */
 @media (max-width: 400px) {
   .container {
     padding: 0 16px;
@@ -1474,7 +1596,7 @@ main {
     width: calc(100% - 16px);
   }
 
-.nav-container {
+  .nav-container {
     padding: 14px 18px;
     gap: 12px;
   }
@@ -1482,7 +1604,6 @@ main {
   .logo-text {
     display: none;
   }
-}
 
   .theme-toggle {
     width: 36px;
@@ -1495,22 +1616,24 @@ main {
     font-size: 0.72rem;
   }
 
+  /* MOD: one column on a phone, two 160px slivers were the "still small" look */
   .skills-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    grid-template-columns: 1fr;
+    gap: 14px;
   }
 
   .skill-card h4 {
-    font-size: 0.9rem;
+    font-size: 1.3rem;
   }
 
   .skill-card p {
-    font-size: 0.75rem;
+    font-size: 0.95rem;
   }
 
   .hero-title {
     font-size: 2.5rem;
   }
+}
 
 /* Landscape phones */
 @media (max-height: 500px) and (orientation: landscape) {
@@ -1523,8 +1646,9 @@ main {
     display: none;
   }
 }
+/* #endregion */
 
-/* ---------- Accessibility ---------- */
+/* #region Accessibility */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -1552,3 +1676,4 @@ main {
   transition: transform 0.05s linear;
   will-change: transform;
 }
+/* #endregion */

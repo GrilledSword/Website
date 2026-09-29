@@ -6,6 +6,16 @@
    Az ikonok a platformok hivatalos SVG logói.
    ============================================ */
 
+/*
+  MINI TUTORIAL – linkek
+  email: a kapcsolat kártyán jelenik meg, mailto: linkként.
+  social: enabled: false elrejti a gombot, url nélkül se rajzolódik ki.
+  Új platform: előbb ICONS-ba egy svg, aztán a social tömbbe egy objektum
+  id, label, url, icon, enabled mezőkkel.
+*/
+
+
+// #region ICONS
 const ICONS = {
   // X (Twitter)
   twitter: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`,
@@ -35,6 +45,9 @@ const ICONS = {
   tiktok: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-3.904V2h-3.45v15.013a2.867 2.867 0 1 1-2.597-2.853v-3.484a6.314 6.314 0 1 0 6.08 6.262V9.59a8.143 8.143 0 0 0 3.737 1.01v-3.44a4.778 4.778 0 0 1-1-0.474z"/></svg>',
 };
 
+// #endregion
+
+// #region LINKS
 const LINKS = {
   // Fő email cím (contact szekció)
   email: "overbitcore@gmail.com",
@@ -42,6 +55,7 @@ const LINKS = {
   // Közösségi / platform linkek
   // Ha nincs még profilod → enabled: false
   social: [
+  // #region facebook
     {
       id: "facebook",
       label: "Facebook",
@@ -49,6 +63,10 @@ const LINKS = {
       icon: ICONS.facebook,
       enabled: true
     },
+  // #endregion
+
+
+  // #region instagram
     {
       id: "instagram",
       label: "Instagram",
@@ -56,6 +74,10 @@ const LINKS = {
       icon: ICONS.instagram,
       enabled: true
     },
+  // #endregion
+
+
+  // #region tiktok
         {
       id: "tiktok",
       label: "TikTok",
@@ -63,6 +85,10 @@ const LINKS = {
       icon: ICONS.tiktok,
       enabled: true
     },
+  // #endregion
+
+
+  // #region youtube
     {
       id: "youtube",
       label: "YouTube",
@@ -70,6 +96,7 @@ const LINKS = {
       icon: ICONS.youtube,
       enabled: true
     },
+  // #endregion
   ],
 
   // Egyéb hasznos linkek (opcionális)
@@ -83,3 +110,4 @@ const LINKS = {
 // Export
 window.LINKS = LINKS;
 window.ICONS = ICONS;
+// #endregion

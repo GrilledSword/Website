@@ -3,6 +3,17 @@
    Modular translation system
    ============================================ */
 
+/*
+  MINI TUTORIAL – új felirat
+  A kulcs egyezzen a HTML data-i18n értékével. Példa:
+    HTML: <span data-i18n="hero.badge">
+    itt:  "hero.badge": "..."  a hu ÉS az en objektumban is.
+  Placeholderhez data-i18n-placeholder és ugyanilyen kulcs.
+  Ha csak az egyik nyelvbe írod, a másik nyelv a HTML-ben hagyott tartalék szöveget mutatja.
+  A készség- és projektkártya szövege NEM itt van, hanem keszsegek.js / projektek.js.
+*/
+
+// #region translations
 const translations = {
 hu: {
     "nav.about": "Rólam",
@@ -86,7 +97,10 @@ hu: {
     "footer.made": "Built with modern web standards and care."
   }
 };
+// #endregion
 
+
+// #region setLanguage
 function setLanguage(lang) {
   if (!translations[lang]) return;
 
@@ -114,7 +128,10 @@ function setLanguage(lang) {
 
   localStorage.setItem('overbitcore-lang', lang);
 }
+// #endregion
 
+
+// #region initI18n
 function initI18n() {
   const saved = localStorage.getItem('overbitcore-lang');
   const browserLang = navigator.language?.startsWith('hu') ? 'hu' : 'en';
@@ -131,3 +148,4 @@ function initI18n() {
 }
 
 window.OverBitI18n = { setLanguage, initI18n, translations };
+// #endregion

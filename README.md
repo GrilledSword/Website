@@ -34,3 +34,17 @@ python3 -m http.server 8080
 ```
 
 Majd: http://localhost:8080
+
+## Minitutorial – közeljövő
+
+A tartalom adat, nem HTML. Egy új dolog felvétele mindig ugyanaz a minta: másolsz egy `#region` blokkot, `hu` és `en` szöveget adsz, frissítesz.
+
+- Új készség: `js/keszsegek.js`. Ikon az `ICON` objektumba, `fill="currentColor"`. A Letöltés gomb a `link` mező.
+- Új projekt: `js/projektek.js`. Kép útvonala a site gyökeréhez képest, pl. `img/project/valami.png`. `status`: `completed`, `concept`, `experimental`, `released`.
+- Új rólam kártya: `js/rolam.js`. Sorrend = megjelenés.
+- Új social: `js/hivatkozasok.js`. `enabled: false` elrejti.
+- Új felirat a vázon (nav, hero, szekciócím): `js/i18n.js`, ugyanazzal a kulccsal, amit a HTML `data-i18n` hordoz. Mindkét nyelvbe.
+- Szín: `css/main.css`, `--accent` / `--accent-2` / `--accent-3`.
+- Kártyaszélesség: `.skills-grid` `minmax(320px, 1fr)`. Kisebb szám = több, keskenyebb kártya.
+
+A `#region` / `#endregion` komment. A böngésző nem látja, a VS Code, a Cursor és a Rider összecsukja.

@@ -3,6 +3,15 @@
    Theme, Renderers, Interactions
    ============================================ */
 
+/*
+  MINI TUTORIAL – ez a karmester, nem a tartalom.
+  DOMContentLoaded: téma, parallax, liquid glass, i18n, aztán a négy renderer.
+  renderAbout / renderSkills / renderProjects / renderLinks a data fájlokat olvassa
+  (window.ABOUT, SKILLS, PROJECTS, LINKS). Új kártyát ott vegyél fel, ne itt.
+  A kapcsolat űrlap a Formspree-re küld. Az ID a fetch URL-ben van, azt cseréld, ha új formod van.
+*/
+
+
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
 
@@ -169,6 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ========== Theme ========== */
+// #region initTheme
 function initTheme() {
   const saved = localStorage.getItem('overbitcore-theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -182,7 +192,10 @@ function initTheme() {
     });
   }
 }
+// #endregion
 
+
+// #region setTheme
 function setTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
   localStorage.setItem('overbitcore-theme', theme);
@@ -191,6 +204,10 @@ function setTheme(theme) {
 }
 
 /* ========== About renderer (rolam.js) ========== */
+// #endregion
+
+
+// #region renderAbout
 function renderAbout() {
   const grid = document.getElementById('aboutGrid');
   if (!grid || !window.ABOUT) return;
@@ -216,6 +233,10 @@ function renderAbout() {
 }
 
 /* ========== Skills renderer (keszsegek.js) ========== */
+// #endregion
+
+
+// #region renderSkills
 function renderSkills() {
   const grid = document.getElementById('skillsGrid');
   if (!grid || !window.SKILLS) return;
@@ -252,6 +273,10 @@ function renderSkills() {
 }
 
 /* ========== Projects renderer ========== */
+// #endregion
+
+
+// #region renderProjects
 function renderProjects() {
   const grid = document.getElementById('projectsGrid');
   if (!grid || !window.PROJECTS) return;
@@ -262,7 +287,8 @@ function renderProjects() {
     const title = p.title?.[lang] || p.title?.en || 'Untitled';
     const desc = p.description?.[lang] || p.description?.en || '';
     const statusText = p.statusText?.[lang] || p.statusText?.en || p.status;
-    const statusClass = p.status || 'dev';
+    /* MOD: a class neve = projektek.js status. Ismeretlen kulcs zöldre esik. */
+    const statusClass = p.status || 'in-development';
     const placeholderClass = index % 3 === 1 ? 'alt' : (index % 3 === 2 ? 'alt2' : '');
     const tagsHtml = (p.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
     
@@ -308,6 +334,10 @@ function renderProjects() {
 }
 
 /* ========== Links renderer ========== */
+// #endregion
+
+
+// #region renderLinks
 function renderLinks() {
   if (!window.LINKS) return;
 
@@ -333,3 +363,4 @@ function renderLinks() {
       `).join('');
   }
 }
+// #endregion

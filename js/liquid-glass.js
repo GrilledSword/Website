@@ -4,6 +4,14 @@
    live as separate glass chips
    ============================================ */
 
+/*
+  MINI TUTORIAL – az üveg nem CSS blur.
+  A .glass / .liquid-glass elemeket ez a fájl mintavételezi és WebGL-lel torzítja.
+  Új üvegpanel: add rá a "glass liquid-glass" osztályt a HTML-ben, a collectPanels összeszedi.
+  Hover horpadás: updateCardTilts. Ha egy kártya nem "él", nézd meg, rajta van-e az osztály.
+*/
+
+
 (function () {
   'use strict';
 
@@ -143,7 +151,7 @@ void main() {
   gl_FragColor = result;
 }
 `;
-
+    // #region createShader
     function createShader(type, source) {
       const s = gl.createShader(type);
       gl.shaderSource(s, source);
@@ -198,11 +206,17 @@ void main() {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    // #endregion
 
+
+    // #region themeIsLight
     function themeIsLight() {
       return document.documentElement.getAttribute('data-theme') === 'light';
     }
+    // #endregion
 
+
+    // #region paintSceneBackground
     function paintSceneBackground(ctx, w, h) {
       if (themeIsLight()) {
         ctx.fillStyle = '#eef1f8';
@@ -237,7 +251,10 @@ void main() {
         ctx.fillRect(0, 0, w, h);
       }
     }
+    // #endregion
 
+
+    // #region updateSceneTexture
     function updateSceneTexture() {
       const w = canvas.width;
       const h = canvas.height;
@@ -266,7 +283,10 @@ void main() {
     let hoverSmooth = 0;
     let overPanel = false;
     let texFrame = 0;
+    // #endregion
 
+
+    // #region resize
     function resize() {
       W = window.innerWidth;
       H = window.innerHeight;
@@ -291,7 +311,10 @@ void main() {
       '.btn.glass-btn, .btn-primary.glass-btn, .btn-secondary.glass-btn, .glass-btn, ' +
       // navbar chips – each lives as its own glass
       '.nav-link, .theme-toggle, .lang-btn, .lang-switcher, .lang-switch, .logo, .glass-sm';
+    // #endregion
 
+
+    // #region hitTestPanels
     function hitTestPanels(clientX, clientY) {
       const nodes = document.querySelectorAll(PANEL_SELECTOR);
       for (let i = 0; i < nodes.length; i++) {
@@ -315,7 +338,10 @@ void main() {
       overPanel = false;
       updateCardTilts(-9999, -9999);
     });
+    // #endregion
 
+
+    // #region readRadiusPx
     function readRadiusPx(el, height) {
       const cs = window.getComputedStyle(el);
       const raw = (cs.borderTopLeftRadius || cs.borderRadius || '12px').split(' ')[0];
@@ -328,7 +354,10 @@ void main() {
     
     /* Subtle card tilt toward cursor – state lerped each frame */
     const tiltState = new WeakMap();
+    // #endregion
 
+
+    // #region updateCardTilts
     function updateCardTilts(mx, my, immediate) {
       const cards = document.querySelectorAll(
         '.about-card, .project-card, .skill-card, .contact-form, .info-card'
@@ -364,8 +393,10 @@ void main() {
           st.ry.toFixed(2) + 'deg) translateY(' + st.ty.toFixed(2) + 'px)';
       });
     }
+    // #endregion
 
-    
+
+    // #region syncNavBackdrop
     function syncNavBackdrop() {
       const nav = document.getElementById('navbar');
       const bd = document.getElementById('navGlassBackdrop');
@@ -379,7 +410,10 @@ void main() {
       bd.style.borderRadius = rad || '100px';
       bd.classList.add('is-ready');
     }
+    // #endregion
 
+
+    // #region collectPanels
     function collectPanels() {
       const nodes = document.querySelectorAll(PANEL_SELECTOR);
       const list = [];
@@ -408,11 +442,17 @@ void main() {
     // Smooth factor per frame (~0.12 = soft ease)
     const LERP = reduced ? 1 : 0.22;
     const LERP_HOVER = reduced ? 1 : 0.18;
+    // #endregion
 
+
+    // #region lerp
     function lerp(a, b, t) {
       return a + (b - a) * t;
     }
+    // #endregion
 
+
+    // #region render
     function render() {
       // Animate mouse + hover strength
       mouseSmooth[0] = lerp(mouseSmooth[0], mouseRaw[0], LERP);
@@ -473,3 +513,4 @@ void main() {
 
   window.OverBitLiquidGlass = { init: initLiquidGlass };
 })();
+    // #endregion

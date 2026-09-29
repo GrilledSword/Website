@@ -2,7 +2,31 @@
    OverBitCore – Projektek / Projects Data
    ============================================ */
 
+/*
+  MINI TUTORIAL – új projekt
+  Másolj egy #region blokkot, és töltsd:
+    id            egyedi, ékezet nélkül
+    title         { hu, en }
+    description   { hu, en }
+    tags          tömb, pl. ["Unity", "3D"]
+    status        a pötty. Ezt switcheled, a feliratot nem ez írja:
+                  "completed"       zöld, nem villog (kész)
+                  "beta"            sárga, nem villog
+                  "beta-playable"   sárga, villog (kipróbálható béta)
+                  "alpha"           piros, nem villog
+                  "alpha-playable"  piros, villog (kipróbálható alfa)
+                  "in-development"  szürke, nem villog
+    statusText    { hu, en }  amit a pont mellé ír, a színtől független
+    image         "img/project/valami.png"  a WebSite mappához képest
+    downloadLink  itch/steam url, vagy null ha nincs Letöltés
+    watchHtml     trailer url, vagy null ha nincs Nézd meg
+    year          szám
+  A kártyát a main.js renderProjects() építi. Itt csak adat van.
+*/
+
+
 const PROJECTS = [
+  // #region mindscape
   {
     id: "mindscape",
     title: {
@@ -19,11 +43,15 @@ const PROJECTS = [
       hu: "Elkészült",
       en: "Completed"
     },
-    image: "img/project/mindscape/main.jpg",
-    downloadLink: "https://grilledsword.itch.io/mindscape",
+    image: "img/project/mindscape.jpg",
+    downloadLink: "https://overbitcore.itch.io/mindscape",
     watchHtml: null,
     year: 2026
   },
+  // #endregion
+
+
+  // #region paleFlame
   {
     id: "paleFlame",
     title: {
@@ -45,6 +73,10 @@ const PROJECTS = [
     watchHtml: null,
     year: 2026
   },
+  // #endregion
+
+
+  // #region corridorZero
   {
     id: "corridorZero",
     title: {
@@ -66,6 +98,10 @@ const PROJECTS = [
     watchHtml: null,
     year: 2026
   },
+  // #endregion
+
+
+  // #region kimiNoShirayuki
   {
     id: "kimiNoShirayuki",
     title: {
@@ -77,7 +113,7 @@ const PROJECTS = [
       en: "You've transferred to a new school, and she's the first one to smile at you. Shirayuki is perfect—kind, beautiful, caring. Maybe... too caring. When pages go missing from your diary, your phone feels watched, and your friends start disappearing one by one, it's already too late. Hide, solve puzzles, and escape—while her voice echoes through the halls. You're not running from a monster. You're running from someone who believes she loves you."
     },
     tags: ["Unity", "3D / Horror", "Psychological", "Escape"],
-    status: "in-development", // [JAVÍTVA: Egységesített kisbetűs status elnevezés]
+    status: "alpha-playable", // [JAVÍTVA: Egységesített kisbetűs status elnevezés]
     statusText: {
       hu: "Fejlesztés Alatt",
       en: "In Development"
@@ -87,6 +123,10 @@ const PROJECTS = [
     watchHtml: null,
     year: 2026
   },
+  // #endregion
+
+
+  // #region determination
   {
     id: "determination",
     title: {
@@ -108,6 +148,10 @@ const PROJECTS = [
     watchHtml: null,
     year: 2026
   },
+  // #endregion
+
+
+  // #region cluckQuest
   {
     id: "cluckQuest",
     title: {
@@ -129,6 +173,7 @@ const PROJECTS = [
     watchHtml: null,
     year: 2026
   }
+  // #endregion
 ];
 
 window.PROJECTS = PROJECTS;

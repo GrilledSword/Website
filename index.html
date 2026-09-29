@@ -13,10 +13,24 @@
   
   <link rel="stylesheet" href="css/main.css">
   
-  <link rel="icon" type="image/svg+xml" href="img/logo.svg">
+  <link rel="icon" type="image/svg+xml" href="img/OverBitCore_Logo.svg">
 </head>
 <body>
+
+  <!--
+    MINI TUTORIAL – index.html csak a váz.
+    A kártyák szövegét NE itt írd. Innen tölti a JS:
+      Rólam    -> js/rolam.js
+      Projektek -> js/projektek.js
+      Készségek -> js/keszsegek.js
+      Email/social -> js/hivatkozasok.js
+    Ami data-i18n="valami" attribútum, annak a szövege js/i18n.js-ben van,
+    hu és en kulccsal. Ha csak itt cserélsz szöveget, a nyelvváltó visszalövi.
+    A script sorrend a lap alján szándékos: előbb az adat, utána a renderer.
+  -->
+
   
+  <!-- #region SVG Filters -->
   <!-- SVG Filters – Liquid Glass refraction -->
   <svg class="svg-filters" aria-hidden="true">
     <defs>
@@ -46,7 +60,9 @@
       </filter>
     </defs>
   </svg>
+  <!-- #endregion -->
 
+  <!-- #region Parallax scene -->
   <!-- ========== 3D PARALLAX + VERTEX SCENE ========== -->
   <div class="parallax-scene" id="parallaxScene" aria-hidden="true">
     <div class="bg-gradient"></div>
@@ -80,22 +96,31 @@
       <div class="hud-crosshair ch-2"></div>
     </div>
   </div>
+  <!-- #endregion -->
 
+  <!-- #region Liquid glass canvas -->
   <!-- Liquid Glass panels (uveg effect on cards / nav / footer) -->
   <canvas id="liquidGlassCanvas" class="liquid-glass-canvas" aria-hidden="true"></canvas>
 
   <!-- Live backdrop under navbar (samples real page content) -->
-  <div id="navGlassBackdrop" class="nav-glass-backdrop" aria-hidden="true"></div>
+  <!-- #endregion -->
 
+  <!-- #region Nav glass backdrop -->
+  <div id="navGlassBackdrop" class="nav-glass-backdrop" aria-hidden="true"></div>
+  <!-- #endregion -->
+
+  <!-- #region Navbar -->
   <!-- Navigation -->
   <header class="navbar glass liquid-glass" id="navbar">
     <div class="container nav-container">
       <a href="#hero" class="logo">
         <span class="logo-icon">
-          <img src="img/logo.svg" class="svg-content" alt="Logo">
+          <img src="img/OverBitCore_Logo.svg" class="svg-content" alt="Logo">
         </span>
-        <span class="logo-text">OverBitCore</span>
-      </a>
+        <span class="logo-text">
+        <img src="img/OverBitCore_Text.svg" class="svg-content" alt="OverBitCore">
+      </span>
+    </a>
       
       <nav class="nav-links" id="navLinks">
         <a href="#about" class="nav-link" data-i18n="nav.about">Rólam</a>
@@ -123,14 +148,17 @@
       </div>
     </div>
   </header>
+  <!-- #endregion -->
 
+  <!-- #region Main -->
   <main>
+    <!-- #region Hero -->
     <!-- Hero -->
     <section id="hero" class="hero">
       <div class="container hero-content">
         <div class="hero-badge glass-sm liquid-glass" data-i18n="hero.badge">Indie játékfejlesztő</div>
         <h1 class="hero-title">
-          <span class="gradient-text">OverBitCore</span>
+          <img src="img/OverBitCore_Text.svg" class="hero-logo-text" alt="OverBitCore">
         </h1>
         <p class="hero-tagline" data-i18n="hero.tagline">Immerszív világokat építek bitről bitre.</p>
         <p class="hero-desc" data-i18n="hero.desc">Egyedül dolgozom indie játékokon – ahol a kreativitás találkozik a precíz kóddal. Hamarosan itt mutatom be a projektjeimet.</p>
@@ -141,7 +169,9 @@
         </div>
       </div>
     </section>
+    <!-- #endregion -->
 
+    <!-- #region About -->
     <!-- About – rendered from rolam.js -->
     <section id="about" class="section">
       <div class="container">
@@ -156,6 +186,9 @@
       </div>
     </section>
 
+    <!-- #endregion -->
+
+    <!-- #region Projects -->
     <!-- Projects – rendered from projektek.js -->
     <section id="projects" class="section section-alt">
       <div class="container">
@@ -171,6 +204,9 @@
       </div>
     </section>
 
+    <!-- #endregion -->
+
+    <!-- #region Skills -->
     <!-- Skills – rendered from keszsegek.js -->
     <section id="skills" class="section">
       <div class="container">
@@ -185,6 +221,9 @@
       </div>
     </section>
 
+    <!-- #endregion -->
+
+    <!-- #region Contact -->
     <!-- Contact -->
     <section id="contact" class="section section-alt">
       <div class="container">
@@ -227,23 +266,31 @@
         </div>
       </div>
     </section>
+    <!-- #endregion -->
   </main>
+  <!-- #endregion -->
 
+  <!-- #region Footer -->
   <footer class="footer liquid-glass">
-    <div class="container footer-content">
-      <div class="footer-brand">
-        <span class="logo-icon">
-          <img src="img/logo.svg" class="svg-content" alt="Logo">
-        </span>
-        <span>OverBitCore</span>
-      </div>
-      <p class="footer-copy">
-        © <span id="year"></span> OverBitCore. 
-        <span data-i18n="footer.rights">Minden jog fenntartva.</span>
-      </p>
+  <div class="container footer-content">
+    <div class="footer-brand">
+      <span class="logo-icon">
+        <img src="img/OverBitCore_Logo.svg" class="svg-content" alt="Logo">
+      </span>
+      <!-- MÓDOSÍTÁS: Szöveg helyett SVG tag -->
+      <span class="logo-text-svg">
+        <img src="img/OverBitCore_Text.svg" class="svg-content" alt="OverBitCore">
+      </span>
     </div>
+    <p class="footer-copy">
+      © <span id="year"></span> OverBitCore. 
+      <span data-i18n="footer.rights">Minden jog fenntartva.</span>
+    </p>
+  </div>
   </footer>
+  <!-- #endregion -->
 
+  <!-- #region Scripts -->
   <!-- Scripts – sorrend fontos -->
   <script src="js/hivatkozasok.js"></script>
   <script src="js/projektek.js"></script>
@@ -253,5 +300,6 @@
   <script src="js/parallax.js"></script>
   <script src="js/liquid-glass.js"></script>
   <script src="js/main.js"></script>
+  <!-- #endregion -->
 </body>
 </html>

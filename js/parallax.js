@@ -3,6 +3,14 @@
    Scroll-driven assembly (GPU-optimized)
    ============================================ */
 
+/*
+  MINI TUTORIAL – a háttér reaktor. Közeljövőben ide ne nyúlj, hacsak a magot nem cseréled.
+  initParallax a #vertexCanvas-ra rajzol. Görgetésre a formAmount nő:
+  vertex -> él -> lap -> tömör mag. A stage* függvények ennek a négy fázisa.
+  Színt a getColors() olvas a CSS változókból, szóval a téma innen is követi a :root-ot.
+*/
+
+
 (function () {
   'use strict';
 
@@ -24,6 +32,7 @@
     let frame = 0;
 
     /* ---------- Geometry: geodesic sphere ---------- */
+    // #region createGeodesic
     function createGeodesic(scale, subdivisions) {
       const t = (1 + Math.sqrt(5)) / 2;
       let verts = [
@@ -92,7 +101,10 @@
 
       return { verts: scaled, faces, edges };
     }
+    // #endregion
 
+
+    // #region createTorus
     function createTorus(R, r, segMajor, segMinor) {
       const verts = [];
       const edges = [];
@@ -123,7 +135,10 @@
     const shell = createGeodesic(1.05, 1);
     const ringA = createTorus(1.45, 0.12, 28, 6);
     const ringB = createTorus(1.7, 0.08, 24, 4);
+    // #endregion
 
+
+    // #region scatterParticle
     function scatterParticle(target, spread) {
       return {
         sx: (Math.random() - 0.5) * spread,
@@ -162,7 +177,10 @@
         speed: 0.25 + Math.random() * 0.6
       });
     }
+    // #endregion
 
+
+    // #region resize
     function resize() {
       // Cap DPR lower = less fill-rate cost
       dpr = Math.min(window.devicePixelRatio || 1, 1.5);
@@ -174,7 +192,10 @@
       canvas.style.height = H + 'px';
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
+    // #endregion
 
+
+    // #region project
     function project(x, y, z, rotY, rotX, currentFormAmount) {
       const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
       const x1 = x * cosY - z * sinY;
@@ -195,7 +216,10 @@
         z: z2
       };
     }
+    // #endregion
 
+
+    // #region getColors
     function getColors() {
       const light = document.documentElement.getAttribute('data-theme') === 'light';
       if (light) {
@@ -237,16 +261,25 @@
         orbit: 'rgba(0,212,255,0.75)'
       };
     }
+    // #endregion
 
+
+    // #region ease
     function ease(t) {
       return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     }
+    // #endregion
 
+
+    // #region Stages
     function stageSolid(f)  { return 1 - Math.max(0, Math.min(1, f / 0.3)); }
     function stageFace(f)   { return 1 - Math.max(0, Math.min(1, (f - 0.15) / 0.35)); }
     function stageEdge(f)   { return 1 - Math.max(0, Math.min(1, (f - 0.35) / 0.35)); }
     function stageVertex(f) { return 1 - Math.max(0, Math.min(1, (f - 0.55) / 0.45)); }
+    // #endregion
 
+
+    // #region updateParts
     function updateParts(parts, stage) {
       for (let i = 0; i < parts.length; i++) {
         const p = parts[i];
@@ -255,7 +288,10 @@
         p.z = p.sz + (p.tz - p.sz) * stage;
       }
     }
+    // #endregion
 
+
+    // #region projectParts
     function projectParts(parts, rotY, rotX, currentForm) {
       for (let i = 0; i < parts.length; i++) {
         const p = parts[i];
@@ -263,7 +299,10 @@
         p.px = pr.x; p.py = pr.y; p.sc = pr.scale; p.pz = pr.z;
       }
     }
+    // #endregion
 
+
+    // #region drawEdges
     function drawEdges(parts, edges, color, alpha, width) {
       if (alpha < 0.02) return;
       ctx.lineWidth = width;
@@ -280,7 +319,10 @@
       ctx.stroke();
       ctx.globalAlpha = 1;
     }
+    // #endregion
 
+
+    // #region drawFaces
     function drawFaces(parts, faces, fillColor, strokeColor, alpha, solidBoost) {
       if (alpha < 0.02) return;
       // Skip expensive sort when mostly transparent; sample subset when dense
@@ -310,7 +352,10 @@
       }
       ctx.globalAlpha = 1;
     }
+    // #endregion
 
+
+    // #region drawVertices
     function drawVertices(parts, color, glowColor, alpha, size) {
       if (alpha < 0.02) return;
       const step = parts.length > 80 ? 2 : 1;
@@ -335,7 +380,10 @@
     // Cache colors – only refresh on theme change
     let cachedColors = getColors();
     let lastTheme = document.documentElement.getAttribute('data-theme');
+    // #endregion
 
+
+    // #region draw
     function draw() {
       if (!running) return;
       frame++;
@@ -527,3 +575,4 @@
 
   window.OverBitParallax = { init: initParallax };
 })();
+    // #endregion

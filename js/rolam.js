@@ -2,7 +2,16 @@
    OverBitCore – Rólam / About Data
    ============================================ */
 
+/*
+  MINI TUTORIAL – Rólam kártya
+  Egy objektum = egy kártya. icon lehet emoji ("🎯") vagy egy SVG string.
+  title és description: { hu, en }. Új kártyához másolj egy #region-t.
+  A renderAbout() a main.js-ben olvassa. Sorrend = megjelenési sorrend.
+*/
+
+
 const ABOUT = [
+  // #region mission
   {
     id: "mission",
     icon: "🎯",
@@ -15,6 +24,10 @@ const ABOUT = [
       en: "Developing quality indie games and software solutions that combine retro aesthetics with modern technology."
     }
   },
+  // #endregion
+
+
+  // #region craft
   {
     id: "craft",
     icon: "🛠️",
@@ -27,6 +40,10 @@ const ABOUT = [
       en: "A balanced approach combining clean code practices and 3D modeling across all project phases."
     }
   },
+  // #endregion
+
+
+  // #region mindset
   {
     id: "mindset",
     icon: "⚡",
@@ -39,6 +56,7 @@ const ABOUT = [
       en: "Structured architecture, modular design, and continuous professional growth."
     }
   }
+  // #endregion
 ];
 
 window.ABOUT = ABOUT;
