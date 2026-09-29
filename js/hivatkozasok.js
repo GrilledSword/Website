@@ -59,7 +59,7 @@ const LINKS = {
     {
       id: "facebook",
       label: "Facebook",
-      url: "https://www.facebook.com/profile.php?id=61592899374239",          // ← ide a te linked
+      url: "https://www.facebook.com/overbitcore/",          // ← ide a te linked
       icon: ICONS.facebook,
       enabled: true
     },
