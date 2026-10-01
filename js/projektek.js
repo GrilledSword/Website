@@ -172,8 +172,32 @@ const PROJECTS = [
     downloadLink: null,
     watchHtml: null,
     year: 2026
-  }
+  },
   // #endregion
+
+// #region the-board-takes
+  {
+    id: "the-board-takes",
+    title: {
+      hu: "The Board Takes",
+      en: "The Board Takes"
+    },
+    description: {
+      hu: "",
+      en: ""
+    },
+    tags: ["Unity", "3D / Puzzle", "Horror"],
+    status: "in-development",
+    statusText: {
+      hu: "Fejlesztés Alatt",
+      en: "In Development"
+    },
+    image: "img/project/theBoardTakes.png",
+    downloadLink: null,
+    watchHtml: null,
+    year: 2027
+  }
+// #endregion
 ];
 
 window.PROJECTS = PROJECTS;
